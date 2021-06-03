@@ -68,5 +68,12 @@ def gameloop():
     velocity_y = 0
     snk_list = []
     snk_length = 1
+    # Check if hiscore file exists
+    if(not os.path.exists("hiscore.txt")):
+        with open("hiscore.txt", "w") as f:
+            f.write("0")
+
+    with open("hiscore.txt", "r") as f:
+        hiscore = f.read()
 
 
