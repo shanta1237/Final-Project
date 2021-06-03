@@ -57,5 +57,16 @@ def welcome():
 
         pygame.display.update()
         clock.tick(60)
+# Game Loop
+def gameloop():
+    # Game specific variables
+    exit_game = False
+    game_over = False
+    snake_x = 45
+    snake_y = 55
+    velocity_x = 0
+    velocity_y = 0
+    snk_list = []
+    snk_length = 1
 
 
