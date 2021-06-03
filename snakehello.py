@@ -126,4 +126,43 @@ def gameloop():
             snake_x = snake_x + velocity_x
             snake_y = snake_y + velocity_y
 
+            if abs(snake_x - food_x)<6 and abs(snake_y - food_y)<6:
+                score +=1
+                food_x = random.randint(20, screen_width / 2)
+                food_y = random.randint(20, screen_height / 2)
+                snk_length +=1
+                if score>int(hiscore):
+                    hiscore = score
+
+            gameWindow.fill(white)
+            gameWindow.blit(bgimg, (0, 0))
+            text_screen("Score: " + str(score) + "  Hiscore: " + str(hiscore), red, 5, 5)
+            pygame.draw.rect(gameWindow, red, [food_x, food_y, snake_size, snake_size])
+
+
+            head = []
+            head.append(snake_x)
+            head.append(snake_y)
+            snk_list.append(head)
+
+            if len(snk_list)>snk_length:
+                del snk_list[0]
+
+            if head in snk_list[:-1]:
+                game_over = True
+                pygame.mixer.music.load('resources/music/crash.mp3')
+                pygame.mixer.music.play()
+
+            if snake_x<0 or snake_x>screen_width or snake_y<0 or snake_y>screen_height:
+                game_over = True
+                pygame.mixer.music.load('resources/music/crash.mp3')
+                pygame.mixer.music.play()
+            plot_snake(gameWindow, black, snk_list, snake_size)
+        pygame.display.update()
+        clock.tick(fps)
+
+    pygame.quit()
+    quit()
+welcome()
+
 
